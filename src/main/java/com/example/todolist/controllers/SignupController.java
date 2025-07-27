@@ -24,40 +24,42 @@ public class SignupController {
 
 	// This runs when user clicks "Sign Up"
 	public void handleSignup(ActionEvent event) {
-		String name = nameField.getText().trim();         // Get name entered by user
-		String email = emailField.getText().trim();       // Get email entered
-		String password = passwordField.getText().trim(); // Get password
+		String name = nameField.getText().trim();
+		String email = emailField.getText().trim();
+		String password = passwordField.getText().trim();
+
+		// 🔒 Check for empty fields
+		if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+			showAlert("Sign Up Failed", "Please fill in all fields to create an account.");
+			return;
+		}
 
 		try (Connection conn = DBUtil.connect()) {
-			// Save the user’s info into the database
 			String sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, name);
 			stmt.setString(2, email);
-			stmt.setString(3, password); // ⚠️ In real apps, passwords should be encrypted!
+			stmt.setString(3, password);
 			stmt.executeUpdate();
 
 			System.out.println("User saved successfully.");
 
-			// ✅ Send a welcome email to the user
 			MailUtil.sendEmail(
 					email,
 					"Welcome to To-Do App",
 					"Hello " + name + ",\n\nYour account has been successfully created.\n\nHappy planning!"
 			);
 
-			// Let user know account was created
 			showAlert("Success", "Account created successfully. Please check your email.");
 
-			// Switch to the login screen
 			loadScene("/fxml/login.fxml", "Login");
 
 		} catch (SQLException e) {
-			// If something goes wrong (e.g., email already used), show error
 			e.printStackTrace();
 			showAlert("Sign Up Error", "Email already exists or input is invalid.");
 		}
 	}
+
 
 	// This takes user back to login screen when "Back to Login" is clicked
 	public void handleBackToLogin(ActionEvent event) {

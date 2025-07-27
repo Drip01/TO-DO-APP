@@ -7,7 +7,7 @@
 <BorderPane xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.todolist.controllers.TodoController"
-            prefHeight="600" prefWidth="600">
+          >
 
     <!-- Top Toolbar -->
     <top>

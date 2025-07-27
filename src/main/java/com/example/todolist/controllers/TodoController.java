@@ -47,11 +47,9 @@ public class TodoController {
 
 	@FXML
 	public void initialize() {
-		// Display tasks in the list views
 		taskListView.setItems(tasks);
 		completedTaskListView.setItems(completedTasks);
 
-		// Custom way of showing tasks with a "✔" button to mark as complete
 		taskListView.setCellFactory(listView -> new ListCell<>() {
 			@Override
 			protected void updateItem(String item, boolean empty) {
@@ -61,12 +59,17 @@ public class TodoController {
 					setGraphic(null);
 				} else {
 					Label taskLabel = new Label(item);
-					Button completeBtn = new Button("✔");   // Mark as done
+					Button completeBtn = new Button("✔");
 					completeBtn.setOnAction(e -> markAsCompleted(item));
 
-					HBox hbox = new HBox(10, taskLabel, completeBtn); // Display task and button side-by-side
-					HBox.setHgrow(taskLabel, javafx.scene.layout.Priority.ALWAYS);
-					hbox.setStyle("-fx-alignment: center-left; -fx-padding: 5 10;");
+					// HBox layout to align button at the end
+					HBox hbox = new HBox();
+					hbox.setSpacing(10);
+					hbox.setStyle("-fx-alignment: center-left; -fx-padding: 5 10 5 10;"); // optional styling
+					HBox spacer = new HBox(); // expands to push the button to the right
+					HBox.setHgrow(spacer, javafx.scene.layout.Priority.ALWAYS);
+
+					hbox.getChildren().addAll(taskLabel, spacer, completeBtn);
 					setGraphic(hbox);
 				}
 			}

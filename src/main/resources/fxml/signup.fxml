@@ -7,15 +7,22 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.todolist.controllers.SignupController"
-            prefWidth="400" prefHeight="400"
-            style="-fx-background-color: #f7f7f7;">
+            prefWidth="800" prefHeight="600"
+            style="-fx-background-image: url('file:src/main/resources/image/todo.jpg'); -fx-background-size: cover;">
 
-    <VBox alignment="CENTER" spacing="15" layoutX="50" layoutY="40" prefWidth="300">
+    <VBox alignment="CENTER" spacing="15"
+          AnchorPane.topAnchor="0.0"
+          AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0"
+          prefWidth="300">
+
         <padding>
             <Insets top="30" bottom="30" left="20" right="20"/>
         </padding>
 
-        <Label text="Create Account" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+        <Label text="Create Account"
+               style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: black; -fx-font-family: 'Comic Sans MS';" />
 
         <TextField fx:id="nameField" promptText="Full Name" maxWidth="250"/>
         <TextField fx:id="emailField" promptText="Email" maxWidth="250"/>
@@ -26,7 +33,6 @@
                 maxWidth="250"/>
 
         <Hyperlink text="Back to Login" onAction="#handleBackToLogin"
-                   style="-fx-font-size: 12px;"/>
+                   style="-fx-font-size: 12px; -fx-text-fill: white;"/>
     </VBox>
-
 </AnchorPane>
